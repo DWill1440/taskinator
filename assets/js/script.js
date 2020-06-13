@@ -222,7 +222,7 @@ var dropTaskHandler = function(event) {
   dropZoneEl.removeAttribute("style");
   dropZoneEl.appendChild(draggableElement);
 
-  // loop through tasks array to find and update the updated task's status
+ /* // loop through tasks array to find and update the updated task's status
   for (var i = 0; i < tasks.length; i++) {
     if (tasks[i].id === parseInt(id)) {
       tasks[i].status = statusSelectEl.value.toLowerCase();
@@ -265,4 +265,28 @@ pageContentEl.addEventListener("change", taskStatusChangeHandler);
 pageContentEl.addEventListener("dragstart", dragTaskHandler);
 pageContentEl.addEventListener("dragover", dropZoneDragHandler);
 pageContentEl.addEventListener("drop", dropTaskHandler);
-pageContentEl.addEventListener("dragleave", dragLeaveHandler);
+pageContentEl.addEventListener("dragleave", dragLeaveHandler);*/
+
+// loop through tasks array to find and update the updated task's status
+        for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === parseInt(id)) {
+            tasks[i].status = statusSelectEl.value.toLowerCase();
+        }
+        }
+        saveTasks()
+    }
+      var dragLeaveHandler = function(event) {
+        var taskListEl = event.target.closest(".task-list");
+        if (taskListEl) {
+            taskListEl.removeAttribute("style");
+            }
+        }
+        var saveTasks = function() {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+          }
+  pageContentEl.addEventListener("click", taskButtonHandler);
+  pageContentEl.addEventListener("change", taskStatusChangeHandler);
+  pageContentEl.addEventListener("dragstart", dragTaskHandler);
+  pageContentEl.addEventListener("dragover", dropZoneDragHandler);
+  pageContentEl.addEventListener("drop", dropTaskHandler);
+  pageContentEl.addEventListener("dragleave", dragLeaveHandler);
